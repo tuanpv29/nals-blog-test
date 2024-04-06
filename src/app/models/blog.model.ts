@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { SortOption } from './sort.model';
 
 export interface Blog {
   id: string;
@@ -19,3 +20,12 @@ export type BlogFormValue = Partial<{
   content: string;
   image: string;
 }>;
+
+export interface BlogStateModel {
+  blogs: Blog[];
+  search: string;
+  sortBy: SortOption;
+  page: number;
+  pageSize: number;
+  collectionSize: number;
+}

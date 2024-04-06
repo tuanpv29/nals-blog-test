@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   NgbDropdownModule,
@@ -8,9 +8,15 @@ import {
 import { BlogCreateModalComponent } from '../../components/blog-create-modal/blog-create-modal.component';
 import { SearchBoxComponent } from '../../components/search-box/search-box.component';
 import { SortSelectionComponent } from '../../components/sort-selection/sort-selection.component';
-import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog.model';
 import { BlogListComponent } from '../../components/blog-list/blog-list.component';
+import { Select, Store } from '@ngxs/store';
+import { Observable, combineLatest } from 'rxjs';
+import { BlogState } from '../../store/blog.state';
+import { AsyncPipe } from '@angular/common';
+import { BlogAction } from '../../store/blog.action';
+import { SortOption } from '../../models/sort.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-blog-home',
@@ -22,36 +28,26 @@ import { BlogListComponent } from '../../components/blog-list/blog-list.componen
     SearchBoxComponent,
     SortSelectionComponent,
     BlogListComponent,
+    AsyncPipe,
   ],
   templateUrl: './blog-home.component.html',
   styleUrl: './blog-home.component.scss',
 })
 export class BlogHomeComponent implements OnInit {
-  private modalService = inject(NgbModal);
-  private blogService = inject(BlogService);
+  @Select(BlogState.blogs) blogs$!: Observable<Blog[]>;
+  @Select(BlogState.search) search$!: Observable<string>;
+  @Select(BlogState.sortBy) sortBy$!: Observable<SortOption>;
+  @Select(BlogState.page) page$!: Observable<number>;
+  @Select(BlogState.pageSize) pageSize$!: Observable<number>;
+  @Select(BlogState.collectionSize) collectionSize$!: Observable<number>;
 
-  blogs: Blog[] = [];
-  search = '';
-  selectedSortOption = 'createdAt';
-  page = 1;
-  sortOptions = [
-    {
-      label: 'Newest',
-      value: 'createdAt',
-    },
-    {
-      label: 'A-Z',
-      value: 'title',
-    },
-  ];
-  pageSize = 20;
-  collectionSize!: number;
+  private modalService = inject(NgbModal);
+  private destroyRef = inject(DestroyRef);
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.blogService.getBlogs().subscribe(blogs => {
-      this.blogs = blogs;
-      this.collectionSize = this.blogs.length;
-    });
+    this.observeToGetBlogs();
   }
 
   onCreateClicked(): void {
@@ -59,17 +55,24 @@ export class BlogHomeComponent implements OnInit {
   }
 
   onSearchChange(text: string): void {
-    console.log('GET:', text);
-    console.log(this.search);
+    this.store.dispatch(new BlogAction.SetSearch(text));
   }
 
-  onSortChange(sort: string): void {
-    console.log('GET:', sort);
-    console.log(this.selectedSortOption);
+  onSortChange(sortBy: SortOption): void {
+    this.store.dispatch(new BlogAction.SetSort(sortBy));
   }
 
   onPageChange(page: number): void {
     console.log(page);
-    console.log(this.page);
+    this.store.dispatch(new BlogAction.SetPage(page));
+  }
+
+  private observeToGetBlogs(): void {
+    combineLatest([this.search$, this.sortBy$, this.page$])
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        console.log('change');
+        this.store.dispatch(new BlogAction.Get());
+      });
   }
 }

@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -16,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './search-box.component.html',
   styleUrl: './search-box.component.scss',
 })
-export class SearchBoxComponent implements OnChanges {
+export class SearchBoxComponent implements OnInit {
   @Input() search!: string;
   @Output() searchChangeEvent = new EventEmitter<string>();
 
@@ -30,7 +24,7 @@ export class SearchBoxComponent implements OnChanges {
       });
   }
 
-  ngOnChanges(): void {
+  ngOnInit(): void {
     if (this.search) {
       this.searchControl.setValue(this.search);
       console.log(this.search);
