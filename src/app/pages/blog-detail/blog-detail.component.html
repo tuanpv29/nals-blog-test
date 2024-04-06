@@ -20,4 +20,20 @@
     <img class="w-100 h-auto my-5" [src]="blog.image" alt="Blog image" />
     <p>{{ blog.content }}</p>
   </div>
+} @else {
+  <div class="bg-light">
+    <div class="container detail-container py-5 placeholder-glow">
+      <nav aria-label="breadcrumb" class="placeholder col-6"></nav>
+      <div class="my-3 py-3 placeholder placeholder-lg col-12"></div>
+      <p class="text-muted placeholder col-4"></p>
+    </div>
+  </div>
+  <div class="container detail-container placeholder-glow">
+    <div class="placeholder col-12 my-5" style="height: 300px"></div>
+    <p class="placeholder col-12"></p>
+    <p class="placeholder col-12"></p>
+    <p class="placeholder col-12"></p>
+    <p class="placeholder col-12"></p>
+    <p class="placeholder col-12"></p>
+  </div>
 }

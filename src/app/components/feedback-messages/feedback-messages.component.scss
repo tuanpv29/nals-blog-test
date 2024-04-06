@@ -1,0 +1,12 @@
+:host {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 1056;
+  padding: 1rem;
+  transform: translate(-50%, 0);
+
+  ngb-alert {
+    width: 300px;
+  }
+}

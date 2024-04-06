@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Blog } from '../models/blog.model';
-import { Observable, tap } from 'rxjs';
+import { Blog, BlogFormValue } from '../models/blog.model';
+import { Observable } from 'rxjs';
 import { SortOption } from '../models/sort.model';
 
 @Injectable({
@@ -50,15 +50,15 @@ export class BlogService {
     return this.http.get<Blog>(`${this.url}/${id}`);
   }
 
-  updateBlog(blog: Blog): Observable<Blog> {
-    return this.http
-      .put<Blog>(`${this.url}/${blog.id}`, blog)
-      .pipe(tap(res => console.log('updateBlog:', res)));
+  createBlog(blogFormValue: BlogFormValue): Observable<Blog> {
+    return this.http.post<Blog>(`${this.url}`, blogFormValue);
   }
 
-  deleteBlog(id: string): Observable<unknown> {
-    return this.http
-      .delete(`${this.url}/${id}`)
-      .pipe(tap(res => console.log('deleteBlog:', res)));
+  updateBlog(blog: Blog): Observable<Blog> {
+    return this.http.put<Blog>(`${this.url}/${blog.id}`, blog);
+  }
+
+  deleteBlog(id: string): Observable<Blog> {
+    return this.http.delete<Blog>(`${this.url}/${id}`);
   }
 }

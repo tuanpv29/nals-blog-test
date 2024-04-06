@@ -1,5 +1,10 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { BlogService } from '../../services/blog.service';
+import { Store } from '@ngxs/store';
+import { BlogAction } from '../../store/blog.action';
+import { FeedbackMessagesService } from '../../services/feedback-messages.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-blog-delete-modal',
@@ -9,12 +14,37 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './blog-delete-modal.component.scss',
 })
 export class BlogDeleteModalComponent {
-  activeModal = inject(NgbActiveModal);
+  @Input() blogId!: string;
 
-  @Input() blogId!: number;
+  isLoading = false;
+
+  constructor(
+    public activeModal: NgbActiveModal,
+    private blogService: BlogService,
+    private store: Store,
+    private feedbackMessagesService: FeedbackMessagesService
+  ) {}
 
   onDeleteBlog(): void {
-    console.log('DELETE:', this.blogId);
-    this.activeModal.close();
+    this.isLoading = true;
+    this.blogService
+      .deleteBlog(this.blogId)
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe({
+        next: () => {
+          this.feedbackMessagesService.add({
+            type: 'success',
+            message: 'Blog successfully deleted!',
+          });
+          this.store.dispatch(new BlogAction.Get());
+          this.activeModal.close();
+        },
+        error: ({ error }) => {
+          this.feedbackMessagesService.add({
+            type: 'danger',
+            message: error,
+          });
+        },
+      });
   }
 }

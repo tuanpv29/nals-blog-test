@@ -28,4 +28,5 @@ export interface BlogStateModel {
   page: number;
   pageSize: number;
   collectionSize: number;
+  isLoading: boolean;
 }

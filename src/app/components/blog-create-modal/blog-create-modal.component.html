@@ -10,14 +10,20 @@
   <button
     type="button"
     class="btn btn-outline-dark"
+    [disabled]="isLoading"
     (click)="activeModal.close()">
     Cancel
   </button>
   <button
     type="button"
     class="btn btn-primary"
-    [disabled]="blogForm.isInvalidForm"
+    [disabled]="blogForm.isInvalidForm || isLoading"
     (click)="onCreateDialog()">
-    Create
+    @if (isLoading) {
+      <span class="spinner-border spinner-border-sm me-1"></span>
+      <span role="status">Loading...</span>
+    } @else {
+      Create
+    }
   </button>
 </div>

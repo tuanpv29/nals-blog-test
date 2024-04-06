@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Blog, BlogForm, BlogFormValue } from '../../models/blog.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-blog-form',
@@ -54,7 +55,7 @@ export class BlogFormComponent implements OnInit {
   }
 
   private observeValueChange(): void {
-    this.blogForm.valueChanges.subscribe(value => {
+    this.blogForm.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
       this.valueChangeEvent.emit(value);
     });
   }

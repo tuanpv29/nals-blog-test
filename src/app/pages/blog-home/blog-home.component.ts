@@ -40,6 +40,7 @@ export class BlogHomeComponent implements OnInit {
   @Select(BlogState.page) page$!: Observable<number>;
   @Select(BlogState.pageSize) pageSize$!: Observable<number>;
   @Select(BlogState.collectionSize) collectionSize$!: Observable<number>;
+  @Select(BlogState.isLoading) isLoading$!: Observable<boolean>;
 
   private modalService = inject(NgbModal);
   private destroyRef = inject(DestroyRef);
@@ -63,7 +64,6 @@ export class BlogHomeComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
-    console.log(page);
     this.store.dispatch(new BlogAction.SetPage(page));
   }
 
@@ -71,7 +71,6 @@ export class BlogHomeComponent implements OnInit {
     combineLatest([this.search$, this.sortBy$, this.page$])
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        console.log('change');
         this.store.dispatch(new BlogAction.Get());
       });
   }

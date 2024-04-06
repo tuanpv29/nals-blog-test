@@ -8,10 +8,20 @@
   <button
     type="button"
     class="btn btn-outline-dark"
-    (click)="activeModal.close()">
+    (click)="activeModal.close()"
+    [disabled]="isLoading">
     Cancel
   </button>
-  <button type="button" class="btn btn-danger" (click)="onDeleteBlog()">
-    Delete
+  <button
+    type="button"
+    class="btn btn-danger"
+    (click)="onDeleteBlog()"
+    [disabled]="isLoading">
+    @if (isLoading) {
+      <span class="spinner-border spinner-border-sm me-1"></span>
+      <span role="status">Loading...</span>
+    } @else {
+      Delete
+    }
   </button>
 </div>

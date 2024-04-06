@@ -3,6 +3,9 @@
 
   &:hover {
     box-shadow: var(--bs-box-shadow-sm);
+    #blog-actions {
+      display: inline-block;
+    }
   }
 }
 
@@ -27,6 +30,8 @@
   z-index: 2;
 
   #blog-actions {
+    display: none;
+
     &::after {
       display: none;
     }

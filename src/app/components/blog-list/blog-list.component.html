@@ -1,56 +1,91 @@
-<ul class="row list-unstyled g-5">
-  @for (blog of blogs; track blog) {
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0 position-relative">
-        <div
-          ngbDropdown
-          class="blog-action-wrapper d-inline-block position-absolute">
-          <button
-            type="button"
-            class="btn btn-light"
-            id="blog-actions"
-            ngbDropdownToggle>
-            <i class="bi bi-three-dots"></i>
-          </button>
-          <div ngbDropdownMenu aria-labelledby="blog-actions">
-            <button ngbDropdownItem (click)="onUpdateClicked(blog)">
-              <i class="bi bi-pencil"></i>
-              Update
-            </button>
-            <button ngbDropdownItem (click)="onDeleteClicked(blog.id)">
-              <i class="bi bi-trash"></i>
-              Delete
-            </button>
-          </div>
-        </div>
-        <div class="row g-0">
-          <div class="col-auto">
-            <div class="img-wrapper">
-              <img
-                width="300"
-                height="200"
-                [src]="blog.image"
-                class="rounded"
-                alt="Blog image" />
+@if (blogs && blogs.length) {
+  <ul class="row list-unstyled g-5">
+    @for (blog of blogs; track blog) {
+      @if (isLoading) {
+        <li class="col-sm-12 col-xl-6 placeholder-glow">
+          <div class="card border-0">
+            <div class="row g-0">
+              <div class="col-auto">
+                <div class="img-wrapper placeholder"></div>
+              </div>
+              <div class="col">
+                <div class="card-body">
+                  <div class="card-title placeholder placeholder col-12"></div>
+                  <div class="placeholder placeholder col-6"></div>
+                  <div>
+                    <div class="py-3 my-3 placeholder col-4"></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">{{ blog.title | titlecase }}</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                {{ blog.createdAt | date }}
-              </p>
-              <a
-                [routerLink]="['/detail', blog.id]"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
+        </li>
+      } @else {
+        <li class="col-sm-12 col-xl-6">
+          <div class="card border-0 position-relative">
+            <div
+              ngbDropdown
+              class="blog-action-wrapper d-inline-block position-absolute">
+              <button
+                type="button"
+                class="btn btn-light"
+                id="blog-actions"
+                ngbDropdownToggle>
+                <i class="bi bi-three-dots"></i>
+              </button>
+              <div ngbDropdownMenu aria-labelledby="blog-actions">
+                <button ngbDropdownItem (click)="onUpdateClicked(blog)">
+                  <i class="bi bi-pencil"></i>
+                  Update
+                </button>
+                <button ngbDropdownItem (click)="onDeleteClicked(blog.id)">
+                  <i class="bi bi-trash"></i>
+                  Delete
+                </button>
+              </div>
+            </div>
+            <div class="row g-0">
+              <div class="col-auto">
+                <div class="img-wrapper">
+                  <img
+                    class="rounded"
+                    width="300"
+                    height="200"
+                    alt="Blog image"
+                    [ngSrc]="blog.image"
+                    priority />
+                </div>
+              </div>
+              <div class="col overflow-hidden">
+                <div class="card-body">
+                  <h5 class="card-title">{{ blog.title | titlecase }}</h5>
+                  <p class="card-text text-muted">
+                    <i class="bi bi-clock"></i>
+                    {{ blog.createdAt | date }}
+                  </p>
+                  <a
+                    [routerLink]="['/detail', blog.id]"
+                    class="read-more-btn btn btn-link stretched-link px-0 text-reset">
+                    Read More
+                    <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </li>
+        </li>
+      }
+    }
+  </ul>
+} @else {
+  @if (isLoading) {
+    <div class="py-5 d-flex align-items-center justify-content-center">
+      <span class="spinner-border me-2"></span>
+      <span role="status">Loading...</span>
+    </div>
+  } @else {
+    <div class="py-5 text-center">
+      <p>No blogs found.</p>
+    </div>
   }
-</ul>
+}

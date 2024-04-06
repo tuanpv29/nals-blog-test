@@ -1,0 +1,5 @@
+@for (alert of feedbackMessagesService.alerts; track alert) {
+  <ngb-alert [type]="alert.type" [dismissible]="false">
+    {{ alert.message }}
+  </ngb-alert>
+}

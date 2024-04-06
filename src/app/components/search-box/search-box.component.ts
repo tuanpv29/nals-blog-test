@@ -27,7 +27,6 @@ export class SearchBoxComponent implements OnInit {
   ngOnInit(): void {
     if (this.search) {
       this.searchControl.setValue(this.search);
-      console.log(this.search);
     }
   }
 }
