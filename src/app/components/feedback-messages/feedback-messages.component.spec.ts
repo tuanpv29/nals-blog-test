@@ -8,10 +8,9 @@ describe('FeedbackMessagesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FeedbackMessagesComponent]
-    })
-    .compileComponents();
-    
+      imports: [FeedbackMessagesComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(FeedbackMessagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

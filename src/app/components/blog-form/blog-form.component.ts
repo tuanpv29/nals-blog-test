@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   FormsModule,
@@ -37,6 +38,18 @@ export class BlogFormComponent implements OnInit {
 
   constructor() {
     this.observeValueChange();
+  }
+
+  get title(): AbstractControl | null {
+    return this.blogForm.get('title');
+  }
+
+  get content(): AbstractControl | null {
+    return this.blogForm.get('content');
+  }
+
+  get image(): AbstractControl | null {
+    return this.blogForm.get('image');
   }
 
   get isInvalidForm(): boolean {

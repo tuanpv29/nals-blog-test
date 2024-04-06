@@ -7,6 +7,9 @@
       id="title"
       placeholder="Enter blog title"
       formControlName="title" />
+    @if (title && title.invalid && (title.dirty || title.touched)) {
+      <div class="invalid-message">Title is required.</div>
+    }
   </div>
   <div class="mb-3">
     <label for="content" class="form-label">Content</label>
@@ -16,6 +19,9 @@
       rows="3"
       placeholder="Enter blog content"
       formControlName="content"></textarea>
+    @if (content && content.invalid && (content.dirty || content.touched)) {
+      <div class="invalid-message">Content is required.</div>
+    }
   </div>
   <div class="mb-3">
     <label for="image" class="form-label">Image</label>
@@ -25,5 +31,8 @@
       id="image"
       placeholder="Enter image link"
       formControlName="image" />
+    @if (image && image.invalid && (image.dirty || image.touched)) {
+      <div class="invalid-message">Image link is required.</div>
+    }
   </div>
 </form>

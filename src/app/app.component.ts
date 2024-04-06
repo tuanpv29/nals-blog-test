@@ -15,8 +15,6 @@ import { FeedbackMessagesComponent } from './components/feedback-messages/feedba
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'nals-blog-test';
-
   constructor(
     public ngbModalConfig: NgbModalConfig,
     private componentFactoryResolver: ComponentFactoryResolver,

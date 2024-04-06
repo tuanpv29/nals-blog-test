@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog.model';
@@ -13,10 +13,12 @@ import { filter } from 'rxjs';
   styleUrl: './blog-detail.component.scss',
 })
 export class BlogDetailComponent implements OnInit {
-  private route = inject(ActivatedRoute);
-  private blogService = inject(BlogService);
-
   blog!: Blog;
+
+  constructor(
+    private route: ActivatedRoute,
+    private blogService: BlogService
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];

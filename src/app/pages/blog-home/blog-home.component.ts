@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   NgbDropdownModule,
@@ -42,10 +42,11 @@ export class BlogHomeComponent implements OnInit {
   @Select(BlogState.collectionSize) collectionSize$!: Observable<number>;
   @Select(BlogState.isLoading) isLoading$!: Observable<boolean>;
 
-  private modalService = inject(NgbModal);
-  private destroyRef = inject(DestroyRef);
-
-  constructor(private store: Store) {}
+  constructor(
+    private store: Store,
+    private modalService: NgbModal,
+    private destroyRef: DestroyRef
+  ) {}
 
   ngOnInit(): void {
     this.observeToGetBlogs();

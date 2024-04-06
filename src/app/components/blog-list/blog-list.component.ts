@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbDropdownModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BlogEditModalComponent } from '../blog-edit-modal/blog-edit-modal.component';
 import { BlogDeleteModalComponent } from '../blog-delete-modal/blog-delete-modal.component';
@@ -20,10 +20,10 @@ import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
   styleUrl: './blog-list.component.scss',
 })
 export class BlogListComponent {
-  private modalService = inject(NgbModal);
-
   @Input() blogs!: Blog[];
   @Input() isLoading = true;
+
+  constructor(private modalService: NgbModal) {}
 
   onUpdateClicked(blog: Blog): void {
     const modalRef = this.modalService.open(BlogEditModalComponent);
