@@ -3,38 +3,3 @@
   right: 1rem;
   z-index: 3;
 }
-
-.card {
-  padding: 0.25rem;
-
-  &:hover {
-    box-shadow: var(--bs-box-shadow-sm);
-  }
-}
-
-.bi-arrow-right {
-  display: inline-block;
-}
-
-.read-more-btn {
-  & > .bi-arrow-right {
-    transition: all 0.2s ease-in-out;
-    transition-property: transform;
-  }
-
-  &:hover > .bi-arrow-right {
-    transform: translateX(0.25rem);
-  }
-}
-
-.blog-action-wrapper {
-  top: 0.5rem;
-  right: 0.5rem;
-  z-index: 2;
-
-  #blog-actions {
-    &::after {
-      display: none;
-    }
-  }
-}

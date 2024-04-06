@@ -11,20 +11,12 @@ import { Blog, BlogFormValue } from '../../models/blog.model';
   styleUrl: './blog-edit-modal.component.scss',
 })
 export class BlogEditModalComponent implements OnInit {
-  @Input() blogId!: number;
   activeModal = inject(NgbActiveModal);
-  foundBlog!: Blog;
+  @Input() blog!: Blog;
   blogFormValue!: BlogFormValue;
 
   ngOnInit(): void {
-    console.log('GET', this.blogId);
-    this.foundBlog = {
-      createdAt: '2024-04-05T07:00:32.685Z',
-      title: 'createfrompostman new',
-      image: 'https://loremflickr.com/640/480/transport',
-      content: 'test create blog from postman',
-      id: '297',
-    };
+    console.log(this.blog);
   }
 
   onValueChange(value: BlogFormValue): void {
@@ -32,7 +24,7 @@ export class BlogEditModalComponent implements OnInit {
   }
 
   onUpdateBlog(): void {
-    const updatedBlog = { ...this.foundBlog, ...this.blogFormValue };
+    const updatedBlog = { ...this.blog, ...this.blogFormValue };
     console.log('PUT:', updatedBlog);
     this.activeModal.close();
   }

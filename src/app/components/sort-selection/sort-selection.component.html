@@ -1,0 +1,16 @@
+<div class="row align-items-center justify-content-end g-0">
+  <div class="col-auto">
+    <label class="col-form-label me-1" for="sort-blog">Sort by:</label>
+  </div>
+  <div class="col-auto">
+    <select
+      id="sort-blog"
+      class="form-select"
+      [(ngModel)]="selectedOption"
+      (ngModelChange)="onSortChange()">
+      @for (option of options; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </div>
+</div>
