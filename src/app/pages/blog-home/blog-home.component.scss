@@ -1,0 +1,26 @@
+.arrange-top-right {
+  top: 1rem;
+  right: 1rem;
+}
+
+.card {
+  padding: 0.25rem;
+  &:hover {
+    box-shadow: var(--bs-box-shadow-sm);
+  }
+}
+
+.bi-arrow-right {
+  display: inline-block;
+}
+
+.read-more-btn {
+  & > .bi-arrow-right {
+    transition: all 0.2s ease-in-out;
+    transition-property: transform;
+  }
+
+  &:hover > .bi-arrow-right {
+    transform: translateX(0.25rem);
+  }
+}
