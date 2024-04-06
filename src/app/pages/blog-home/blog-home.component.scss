@@ -1,10 +1,12 @@
-.arrange-top-right {
+.create-btn {
   top: 1rem;
   right: 1rem;
+  z-index: 3;
 }
 
 .card {
   padding: 0.25rem;
+
   &:hover {
     box-shadow: var(--bs-box-shadow-sm);
   }
@@ -22,5 +24,17 @@
 
   &:hover > .bi-arrow-right {
     transform: translateX(0.25rem);
+  }
+}
+
+.blog-action-wrapper {
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+
+  #blog-actions {
+    &::after {
+      display: none;
+    }
   }
 }

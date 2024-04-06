@@ -1,0 +1,24 @@
+<div class="modal-header">
+  <h4 class="modal-title">Update Blog</h4>
+</div>
+<div class="modal-body">
+  <app-blog-form
+    #blogForm
+    [blog]="foundBlog"
+    (valueChangeEvent)="onValueChange($event)"></app-blog-form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close()">
+    Close
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="blogForm.isInvalidForm"
+    (click)="onUpdateBlog()">
+    Update
+  </button>
+</div>

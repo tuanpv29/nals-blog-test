@@ -1,0 +1,28 @@
+<form [formGroup]="blogForm">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      placeholder="Enter blog title"
+      formControlName="title" />
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea
+      class="form-control"
+      id="content"
+      rows="3"
+      placeholder="Enter blog content"
+      formControlName="content"></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Image</label>
+    <input
+      class="form-control"
+      type="text"
+      id="image"
+      formControlName="image" />
+  </div>
+</form>

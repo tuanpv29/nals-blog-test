@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title">Create Blog</h4>
+</div>
+<div class="modal-body">
+  <app-blog-form
+    #blogForm
+    (valueChangeEvent)="onValueChange($event)"></app-blog-form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-outline-dark"
+    (click)="activeModal.close()">
+    Cancel
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    [disabled]="blogForm.isInvalidForm"
+    (click)="onCreateDialog()">
+    Create
+  </button>
+</div>

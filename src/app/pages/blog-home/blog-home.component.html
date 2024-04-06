@@ -1,17 +1,22 @@
-<div class="bg-light position-relative">
-  <button
-    type="button"
-    class="btn btn-primary btn-lg position-absolute arrange-top-right">
-    <i class="bi bi-plus-lg"></i>
-    Create Blog
-  </button>
+<button
+  type="button"
+  class="create-btn btn btn-primary btn-lg position-fixed"
+  (click)="onCreateClicked()">
+  <i class="bi bi-plus-lg"></i>
+  Create Blog
+</button>
+<div class="bg-light">
   <div class="container py-5 text-center">
     <span class="fs-1 d-inline-block my-3">Our Blog</span>
-    <input
-      id="search-blog"
-      type="email"
-      class="form-control"
-      placeholder="Search Blog" />
+    <div class="row">
+      <div class="col-xl-4 mx-auto">
+        <input
+          id="search-blog"
+          type="email"
+          class="form-control"
+          placeholder="Search Blog" />
+      </div>
+    </div>
   </div>
 </div>
 <div class="container">
@@ -27,180 +32,58 @@
     </div>
   </div>
   <ul class="row list-unstyled g-5">
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0">
-        <div class="row g-0">
-          <div class="col-auto">
-            <img
-              width="300"
-              height="200"
-              src="https://placehold.co/600x400"
-              class="img-fluid rounded"
-              alt="..." />
+    @for (blog of blogs; track blog) {
+      <li class="col-sm-12 col-xl-6">
+        <div class="card border-0 position-relative">
+          <div
+            ngbDropdown
+            class="blog-action-wrapper d-inline-block position-absolute">
+            <button
+              type="button"
+              class="btn btn-light"
+              id="blog-actions"
+              ngbDropdownToggle>
+              <i class="bi bi-three-dots"></i>
+            </button>
+            <div ngbDropdownMenu aria-labelledby="blog-actions">
+              <button ngbDropdownItem (click)="onUpdateClicked()">
+                <i class="bi bi-pencil"></i>
+                Update
+              </button>
+              <button ngbDropdownItem (click)="onDeleteClicked()">
+                <i class="bi bi-trash"></i>
+                Delete
+              </button>
+            </div>
           </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Blog Title</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                Jan 10, 1998
-              </p>
-              <a
-                [routerLink]="['/detail/1']"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
+          <div class="row g-0">
+            <div class="col-auto">
+              <img
+                width="300"
+                height="200"
+                src="https://placehold.co/300x200"
+                class="img-fluid rounded"
+                alt="..." />
+            </div>
+            <div class="col">
+              <div class="card-body">
+                <h5 class="card-title">Blog Title {{ blog }}</h5>
+                <p class="card-text text-muted">
+                  <i class="bi bi-clock"></i>
+                  Jan 10, 1998
+                </p>
+                <a
+                  [routerLink]="['/detail/1']"
+                  class="read-more-btn btn btn-link stretched-link px-0 text-reset">
+                  Read More
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </li>
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0">
-        <div class="row g-0">
-          <div class="col-auto">
-            <img
-              width="300"
-              height="200"
-              src="https://placehold.co/600x400"
-              class="img-fluid rounded"
-              alt="..." />
-          </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Blog Title</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                Jan 10, 1998
-              </p>
-              <a
-                [routerLink]="['/detail/1']"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0">
-        <div class="row g-0">
-          <div class="col-auto">
-            <img
-              width="300"
-              height="200"
-              src="https://placehold.co/600x400"
-              class="img-fluid rounded"
-              alt="..." />
-          </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Blog Title</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                Jan 10, 1998
-              </p>
-              <a
-                [routerLink]="['/detail/1']"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0">
-        <div class="row g-0">
-          <div class="col-auto">
-            <img
-              width="300"
-              height="200"
-              src="https://placehold.co/600x400"
-              class="img-fluid rounded"
-              alt="..." />
-          </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Blog Title</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                Jan 10, 1998
-              </p>
-              <a
-                [routerLink]="['/detail/1']"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0">
-        <div class="row g-0">
-          <div class="col-auto">
-            <img
-              width="300"
-              height="200"
-              src="https://placehold.co/600x400"
-              class="img-fluid rounded"
-              alt="..." />
-          </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Blog Title</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                Jan 10, 1998
-              </p>
-              <a
-                [routerLink]="['/detail/1']"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="col-sm-12 col-xl-6">
-      <div class="card border-0">
-        <div class="row g-0">
-          <div class="col-auto">
-            <img
-              width="300"
-              height="200"
-              src="https://placehold.co/600x400"
-              class="img-fluid rounded"
-              alt="..." />
-          </div>
-          <div class="col">
-            <div class="card-body">
-              <h5 class="card-title">Blog Title</h5>
-              <p class="card-text text-muted">
-                <i class="bi bi-clock"></i>
-                Jan 10, 1998
-              </p>
-              <a
-                [routerLink]="['/detail/1']"
-                class="read-more-btn btn btn-link stretched-link px-0 text-reset">
-                Read More
-                <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
+      </li>
+    }
   </ul>
   <div class="py-5">
     <ngb-pagination
