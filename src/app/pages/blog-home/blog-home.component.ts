@@ -57,7 +57,10 @@ export class BlogHomeComponent implements OnInit {
   }
 
   onSearchChange(text: string): void {
-    this.store.dispatch(new BlogAction.SetSearch(text));
+    this.store.dispatch([
+      new BlogAction.SetSearch(text),
+      new BlogAction.SetPage(1),
+    ]);
   }
 
   onSortChange(sortBy: SortOption): void {

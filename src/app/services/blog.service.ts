@@ -12,12 +12,7 @@ export class BlogService {
 
   constructor(private http: HttpClient) {}
 
-  getBlogs(
-    search: string,
-    sortBy: SortOption,
-    page: number,
-    limit: number
-  ): Observable<Blog[]> {
+  getBlogs(search: string, sortBy: SortOption): Observable<Blog[]> {
     let params = new HttpParams();
     if (search) {
       params = params.append('search', search);
@@ -34,12 +29,6 @@ export class BlogService {
           params = params.append('order', 'desc');
           break;
       }
-    }
-    if (page) {
-      params = params.append('page', page);
-    }
-    if (limit) {
-      params = params.append('limit', limit);
     }
     return this.http.get<Blog[]>(`${this.url}`, {
       params,

@@ -5,6 +5,7 @@ import { BlogAction } from './blog.action';
 import { BlogService } from '../services/blog.service';
 import { catchError, finalize, tap, throwError } from 'rxjs';
 import { SortOption } from '../models/sort.model';
+import { paginate } from '../helpers/paginate';
 
 @State<BlogStateModel>({
   name: 'blog',
@@ -61,9 +62,11 @@ export class BlogState {
   getBlogs(ctx: StateContext<BlogStateModel>) {
     ctx.patchState({ isLoading: true });
     const { search, sortBy, page, pageSize } = ctx.getState();
-    return this.blogService.getBlogs(search, sortBy, page, pageSize).pipe(
-      tap(response => {
-        ctx.patchState({ blogs: response, collectionSize: 100 });
+    return this.blogService.getBlogs(search, sortBy).pipe(
+      tap(blogs => {
+        if (!blogs) return;
+        const paginatedBlogs = paginate(blogs, page, pageSize);
+        ctx.patchState({ blogs: paginatedBlogs, collectionSize: blogs.length });
       }),
       catchError(error => {
         if (error.status === 404) {
