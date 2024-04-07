@@ -13,6 +13,9 @@ export class BlogService {
   constructor(private http: HttpClient) {}
 
   getBlogs(search: string, sortBy: SortOption): Observable<Blog[]> {
+    // Note: Currently, the API doesn't support pagination.
+    // Add page and limit pagination parameters when the API supports it.
+
     let params = new HttpParams();
     if (search) {
       params = params.append('search', search);

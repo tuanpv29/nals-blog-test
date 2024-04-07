@@ -62,6 +62,10 @@ export class BlogState {
   getBlogs(ctx: StateContext<BlogStateModel>) {
     ctx.patchState({ isLoading: true });
     const { search, sortBy, page, pageSize } = ctx.getState();
+
+    // Note: The GET blogs API doesn't support pagination.
+    // Add page and pageSize values to getBlogs(), when the API supports it.
+
     return this.blogService.getBlogs(search, sortBy).pipe(
       tap(blogs => {
         if (!blogs) return;
