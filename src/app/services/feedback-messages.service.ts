@@ -6,7 +6,6 @@ import { Alert } from '../models/alert.model';
 })
 export class FeedbackMessagesService {
   alerts: Alert[] = [];
-  private timeoutIds: ReturnType<typeof setTimeout>[] = [];
 
   add(alert: Alert): void {
     this.alerts.push(alert);
