@@ -2,13 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BlogService } from '../../services/blog.service';
 import { Blog } from '../../models/blog.model';
-import { DatePipe, TitleCasePipe } from '@angular/common';
+import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
 import { filter } from 'rxjs';
+import { ImageFallbackDirective } from '../../directives/image-fallback.directive';
 
 @Component({
   selector: 'app-blog-detail',
   standalone: true,
-  imports: [RouterLink, DatePipe, TitleCasePipe],
+  imports: [
+    RouterLink,
+    DatePipe,
+    TitleCasePipe,
+    NgOptimizedImage,
+    ImageFallbackDirective,
+  ],
   templateUrl: './blog-detail.component.html',
   styleUrl: './blog-detail.component.scss',
 })

@@ -17,7 +17,14 @@
     </div>
   </div>
   <div class="container detail-container">
-    <img class="w-100 h-auto my-5" [src]="blog.image" alt="Blog image" />
+    <img
+      appImageFallback
+      width="300"
+      height="200"
+      class="w-100 h-auto my-5"
+      alt="Blog image"
+      [ngSrc]="blog.image"
+      priority />
     <p>{{ blog.content }}</p>
   </div>
 } @else {

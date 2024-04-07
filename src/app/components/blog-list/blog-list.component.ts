@@ -5,6 +5,7 @@ import { BlogDeleteModalComponent } from '../blog-delete-modal/blog-delete-modal
 import { Blog } from '../../models/blog.model';
 import { RouterLink } from '@angular/router';
 import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
+import { ImageFallbackDirective } from '../../directives/image-fallback.directive';
 
 @Component({
   selector: 'app-blog-list',
@@ -15,6 +16,7 @@ import { DatePipe, NgOptimizedImage, TitleCasePipe } from '@angular/common';
     DatePipe,
     TitleCasePipe,
     NgOptimizedImage,
+    ImageFallbackDirective,
   ],
   templateUrl: './blog-list.component.html',
   styleUrl: './blog-list.component.scss',
